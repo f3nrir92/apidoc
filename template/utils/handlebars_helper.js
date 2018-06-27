@@ -134,8 +134,12 @@ define([
      *
      */
     Handlebars.registerHelper('splitFill', function(value, splitChar, fillChar) {
+        var dotTemp = '$#%';
+        var escapedDot = '\\.';
+        value = value.replace(escapedDot, dotTemp);
         var splits = value.split(splitChar);
-        return new Array(splits.length).join(fillChar) + splits[splits.length - 1];
+
+        return new Array(splits.length).join(fillChar) + (splits[splits.length - 1].replace(dotTemp, '.'));
     });
 
     /**
